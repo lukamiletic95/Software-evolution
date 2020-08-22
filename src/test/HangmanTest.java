@@ -10,32 +10,23 @@ class HangmanTest {
 	@Test
 	void testInitialGameState() {
 		String wordToGuess = "SoftwareEvolution";
-		int numberOfAttempts = 10;
 		
-		Hangman game = new Hangman(wordToGuess, numberOfAttempts);
+		Hangman game = new Hangman(wordToGuess);
 		
-		assertTrue(game.getWordToGuess().equals(wordToGuess));
-		assertTrue(game.getNumberOfAttempts() == numberOfAttempts);
+		assertTrue(game.getWordToGuess().toLowerCase().equals(wordToGuess));
+		assertTrue(game.getCurrentNumberOfAttempts() + Hangman.MAX_NUMBER_OF_ATTEMPTS_PER_GAME == Hangman.MAX_NUMBER_OF_ATTEMPTS_PER_GAME);
+		assertTrue(!game.isWin());
+		assertTrue(!game.isLoss());
 	}
 	
 	@Test
 	void testInitialGameStateNonAlphabeticWord() {
 		Exception ex = assertThrows(
 				IllegalArgumentException.class,
-				() -> new Hangman("ЕволуцијаСофтвера", 10)); 
+				() -> new Hangman("ЕволуцијаСофтвера")); 
 		
 		assertTrue(ex instanceof IllegalArgumentException);
 		assertTrue(ex.getMessage().equals("Invalid word to guess provided. Only english alphabet letters are supported!"));
-	}
-	
-	@Test
-	void testInitialGameStateInvalidNumberOfAttempts() {
-		Exception ex = assertThrows(
-				IllegalArgumentException.class,
-				() -> new Hangman("SoftwareEvolution", -10)); 
-		
-		assertTrue(ex instanceof IllegalArgumentException);
-		assertTrue(ex.getMessage().equals("Invalid number of attempts provided. Number of attempts has to be greater than zero!"));
 	}
 
 }
