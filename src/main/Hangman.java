@@ -1,6 +1,7 @@
 package main;
 
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.regex.*;
 
 public class Hangman {
 
@@ -14,16 +15,20 @@ public class Hangman {
 	
 	private String wordToGuess;	
 	private int currentNumberOfFailedAttempts;
+	private long numberOfDistinctCharacters;
 	private GameState gameState;
+	private HashSet<Character> guessedLetters;
 	
 	public Hangman(String wordToGuess) {	
 		if (!Pattern.matches("[a-zA-Z]+", wordToGuess)) {
-			throw new IllegalArgumentException("Invalid word to guess provided. Only english alphabet letters are supported!");	
+			throw new IllegalArgumentException(Constants.INVALID_WORD_TO_GUESS_MESSAGE);	
 		}
 		
 		this.wordToGuess = wordToGuess.toLowerCase();
 		this.currentNumberOfFailedAttempts = 0;
+		this.numberOfDistinctCharacters = this.wordToGuess.chars().distinct().count();
 		this.gameState = GameState.InProgress;
+		this.guessedLetters = new HashSet<Character>();
 	}
 	
 	public String getWordToGuess() {
@@ -40,6 +45,28 @@ public class Hangman {
 	
 	public boolean isLoss() {
 		return this.gameState.equals(GameState.Loss);
+	}
+	
+	public boolean guess(char c) {
+		c = Character.toLowerCase(c);		
+		
+		if (this.wordToGuess.indexOf(c) != -1) {			
+			this.guessedLetters.add(c);
+			
+			if (this.guessedLetters.size() == this.numberOfDistinctCharacters) {
+				this.gameState = GameState.Win;
+			}
+			
+			return true;
+		} else {
+			this.currentNumberOfFailedAttempts++;
+			
+			if (this.currentNumberOfFailedAttempts == MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME) {
+				this.gameState = GameState.Loss;
+			}
+			
+			return false;
+		}
 	}
 	
 }

@@ -3,6 +3,8 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import main.Constants;
 import main.Hangman;
 
 class HangmanTest {
@@ -25,7 +27,7 @@ class HangmanTest {
 				() -> new Hangman("ЕволуцијаСофтвера")); 
 		
 		assertTrue(ex instanceof IllegalArgumentException);
-		assertTrue(ex.getMessage().equals("Invalid word to guess provided. Only english alphabet letters are supported!"));
+		assertTrue(ex.getMessage().equals(Constants.INVALID_WORD_TO_GUESS_MESSAGE));
 	}
 	
 	@Test
@@ -70,26 +72,6 @@ class HangmanTest {
 		assertTrue(game.getCurrentNumberOfFailedAttempts() == Hangman.MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME);
 		assertTrue(!game.isWin());
 		assertTrue(game.isLoss());
-	}
-	
-	@Test
-	void testMaxNumberOfFailedAttemptsExceeded() {
-		String wordToGuess = "SoftwareEvolution";
-		Hangman game = new Hangman(wordToGuess);
-		
-		assertTrue(!game.guess('x'));
-		assertTrue(!game.guess('y'));
-		assertTrue(!game.guess('z'));
-		assertTrue(!game.guess('q'));
-		assertTrue(!game.guess('p'));
-		assertTrue(!game.guess('k'));
-		
-		Exception ex = assertThrows(
-			IllegalStateException.class,
-			() -> game.guess('s'));
-		
-		assertTrue(ex instanceof IllegalStateException);
-		assertTrue(ex.getMessage().equals("Cannot invoke a guess action when the maximum number of failed attempts has been reached!"));
 	}
 
 }
