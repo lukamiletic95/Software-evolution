@@ -25,7 +25,7 @@ class HangmanTest {
 				() -> new Hangman("ЕволуцијаСофтвера", 10)); 
 		
 		assertTrue(ex instanceof IllegalArgumentException);
-		assertTrue(ex.getMessage().equals("Invalid word to guess provided. Only alphabetic words are supported!"));
+		assertTrue(ex.getMessage().equals("Invalid word to guess provided. Only english alphabet letters are supported!"));
 	}
 	
 	@Test
