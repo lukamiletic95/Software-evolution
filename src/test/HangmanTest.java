@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
-import main.Constants;
-import main.Hangman;
+import main.model.Constants;
+import main.model.Hangman;
 
 class HangmanTest {
 
