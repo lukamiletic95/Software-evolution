@@ -13,7 +13,7 @@ class HangmanTest {
 		
 		Hangman game = new Hangman(wordToGuess);
 		
-		assertTrue(game.getWordToGuess().toLowerCase().equals(wordToGuess));
+		assertTrue(game.getWordToGuess().equals(wordToGuess.toLowerCase()));
 		assertTrue(game.getCurrentNumberOfAttempts() + Hangman.MAX_NUMBER_OF_ATTEMPTS_PER_GAME == Hangman.MAX_NUMBER_OF_ATTEMPTS_PER_GAME);
 		assertTrue(!game.isWin());
 		assertTrue(!game.isLoss());

@@ -4,28 +4,42 @@ import java.util.regex.Pattern;
 
 public class Hangman {
 
-	private String wordToGuess;
-	private int numberOfAttempts;
+	public static final int MAX_NUMBER_OF_ATTEMPTS_PER_GAME = 6;
 	
-	public Hangman(String wordToGuess, int numberOfAttempts) {
-		if (numberOfAttempts <= 0) {
-			throw new IllegalArgumentException("Invalid number of attempts provided. Number of attempts has to be greater than zero!");
-		}
-		
+	private enum GameState {
+		InProgress,
+		Win,
+		Loss
+	}
+	
+	private String wordToGuess;	
+	private int currentNumberOfAttempts;
+	private GameState gameState;
+	
+	public Hangman(String wordToGuess) {	
 		if (!Pattern.matches("[a-zA-Z]+", wordToGuess)) {
 			throw new IllegalArgumentException("Invalid word to guess provided. Only english alphabet letters are supported!");	
 		}
 		
-		this.wordToGuess = wordToGuess;
-		this.numberOfAttempts = numberOfAttempts;
+		this.wordToGuess = wordToGuess.toLowerCase();
+		this.currentNumberOfAttempts = 0;
+		this.gameState = GameState.InProgress;
 	}
 	
 	public String getWordToGuess() {
 		return this.wordToGuess;
 	}
 	
-	public int getNumberOfAttempts() {
-		return this.numberOfAttempts;
+	public int getCurrentNumberOfAttempts() {
+		return this.currentNumberOfAttempts;
+	}
+	
+	public boolean isWin() {
+		return this.gameState.equals(GameState.Win);
+	}
+	
+	public boolean isLoss() {
+		return this.gameState.equals(GameState.Loss);
 	}
 	
 }
