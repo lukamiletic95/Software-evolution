@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class Hangman {
 
-	public static final int MAX_NUMBER_OF_ATTEMPTS_PER_GAME = 6;
+	public static final int MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME = 6;
 	
 	private enum GameState {
 		InProgress,
@@ -13,7 +13,7 @@ public class Hangman {
 	}
 	
 	private String wordToGuess;	
-	private int currentNumberOfAttempts;
+	private int currentNumberOfFailedAttempts;
 	private GameState gameState;
 	
 	public Hangman(String wordToGuess) {	
@@ -22,7 +22,7 @@ public class Hangman {
 		}
 		
 		this.wordToGuess = wordToGuess.toLowerCase();
-		this.currentNumberOfAttempts = 0;
+		this.currentNumberOfFailedAttempts = 0;
 		this.gameState = GameState.InProgress;
 	}
 	
@@ -30,8 +30,8 @@ public class Hangman {
 		return this.wordToGuess;
 	}
 	
-	public int getCurrentNumberOfAttempts() {
-		return this.currentNumberOfAttempts;
+	public int getCurrentNumberOfFailedAttempts() {
+		return this.currentNumberOfFailedAttempts;
 	}
 	
 	public boolean isWin() {
