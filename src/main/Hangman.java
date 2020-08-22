@@ -4,8 +4,6 @@ import java.util.*;
 import java.util.regex.*;
 
 public class Hangman {
-
-	public static final int MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME = 6;
 	
 	private enum GameState {
 		InProgress,
@@ -61,7 +59,7 @@ public class Hangman {
 		} else {
 			this.currentNumberOfFailedAttempts++;
 			
-			if (this.currentNumberOfFailedAttempts == MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME) {
+			if (this.currentNumberOfFailedAttempts == Constants.MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME) {
 				this.gameState = GameState.Loss;
 			}
 			

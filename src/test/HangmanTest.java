@@ -15,7 +15,7 @@ class HangmanTest {
 		Hangman game = new Hangman(wordToGuess);
 		
 		assertTrue(game.getWordToGuess().equals(wordToGuess.toLowerCase()));
-		assertTrue(game.getCurrentNumberOfFailedAttempts() + Hangman.MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME == Hangman.MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME);
+		assertTrue(game.getCurrentNumberOfFailedAttempts() + Constants.MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME == Constants.MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME);
 		assertTrue(!game.isWin());
 		assertTrue(!game.isLoss());
 	}
@@ -69,7 +69,7 @@ class HangmanTest {
 		assertTrue(!game.guess('p'));
 		assertTrue(!game.guess('k'));
 		
-		assertTrue(game.getCurrentNumberOfFailedAttempts() == Hangman.MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME);
+		assertTrue(game.getCurrentNumberOfFailedAttempts() == Constants.MAX_NUMBER_OF_FAILED_ATTEMPTS_PER_GAME);
 		assertTrue(!game.isWin());
 		assertTrue(game.isLoss());
 	}
