@@ -1,8 +1,6 @@
 package main.view;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
+import java.awt.*;
 import javax.swing.*;
 
 import main.Constants;
@@ -23,6 +21,8 @@ public class HangmanBoard extends JFrame {
 		
 		String wordToGuess = getWordToGuess(inputDialog);
 		model = new Hangman(wordToGuess);
+		
+		addGuessInfo();
 	}
 
 	private String getWordToGuess(HangmanInputDialog inputDialog) {
@@ -37,6 +37,22 @@ public class HangmanBoard extends JFrame {
 	
 	public String getWordToGuess() {
 		return (model == null) ? null : model.getWordToGuess();
+	}
+	
+	private void addGuessInfo() {
+		JPanel guessInfo = new JPanel();
+		guessInfo.setName(Constants.GUESS_INFO_PANEL_NAME);
+		guessInfo.setLayout(new GridLayout(1, 2));
+		
+		JLabel guessInfoWord = new JLabel(Constants.GUESS_INFO_WORD_LABEL_TEXT + model.getWordToGuessHidden());
+		guessInfoWord.setName(Constants.GUESS_INFO_WORD_LABEL_NAME);		
+		guessInfo.add(guessInfoWord);
+		
+		JLabel guessInfoFailedAttempts = new JLabel(Constants.GUESS_INFO_FAILED_ATTEMPTS_LABEL_TEXT + model.getCurrentNumberOfFailedAttempts());
+		guessInfoFailedAttempts.setName(Constants.GUESS_INFO_FAILED_ATTEMPTS_LABEL_NAME);
+		guessInfo.add(guessInfoFailedAttempts);
+		
+		this.add(guessInfo, BorderLayout.NORTH);
 	}
 
 }

@@ -35,6 +35,22 @@ public class Hangman {
 		return this.wordToGuess;
 	}
 	
+	public String getWordToGuessHidden() {
+		char[] wordToGuessHidden = new char[this.wordToGuess.length()];
+		
+		for (int i = 0; i < this.wordToGuess.length(); i++) {
+			char c = this.wordToGuess.charAt(i);
+			
+			if (this.guessedLetters.contains(c)) {
+				wordToGuessHidden[i] = c;
+			} else {
+				wordToGuessHidden[i] = '#';
+			}
+		}
+		
+		return new String(wordToGuessHidden);
+	}
+	
 	public int getCurrentNumberOfFailedAttempts() {
 		return this.currentNumberOfFailedAttempts;
 	}
