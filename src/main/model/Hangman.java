@@ -3,6 +3,8 @@ package main.model;
 import java.util.*;
 import java.util.regex.*;
 
+import main.Constants;
+
 public class Hangman {
 	
 	private enum GameState {
